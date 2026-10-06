@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jeunesse Libertaire — Média participatif</title>
+  <meta name="description" content="Média participatif des luttes lycéennes et de l’éducation populaire.">
+  <link rel="stylesheet" href="[(#CHEMIN{css/jeunesse.css})]">
+</head>
+<body>
+<header class="site-header">
+  <a class="wordmark" href="#URL_SITE_SPIP"><span class="mark">Ⓐ</span> JEUNESSE<br>LIBERTAIRE</a>
+  <nav aria-label="Navigation principale"><a href="#URL_RUBRIQUE{actualites}">Actualités</a><a href="#URL_RUBRIQUE{temoignages}">Témoignages</a><a href="#URL_RUBRIQUE{analyses}">Analyses</a><a href="#URL_RUBRIQUE{ressources}">Ressources</a></nav>
+  <a class="button button-small" href="#URL_PAGE{proposer}">Proposer un texte <span aria-hidden="true">↗</span></a>
+</header>
+<main>
+  <section class="hero">
+    <div class="hero-copy"><p class="eyebrow">Média participatif · Éducation populaire</p><h1>Nos voix.<br><em>Nos luttes.</em><br>Nos savoirs.</h1><p class="intro">Un média écrit par celles et ceux qui vivent les lycées, les mobilisations et les transformations sociales.</p><a class="button" href="#URL_PAGE{proposer}">✎ &nbsp;Proposer une publication</a></div>
+    <div class="hero-art" aria-label="Visuel typographique militant"><span class="sun"></span><span class="art-a">Ⓐ</span><span class="art-caption">S’INFORMER<br>S’ORGANISER<br>PARTAGER</span><span class="art-no">01 / 26</span></div>
+  </section>
+  <section class="ticker"><span>✳ ACTUALITÉS DES LYCÉES</span><span>✳ TÉMOIGNAGES</span><span>✳ ANALYSES</span><span>✳ OUTILS POUR AGIR</span></section>
+  <section class="section-head"><div><p class="eyebrow">À lire, à discuter, à transmettre</p><h2>Dernières publications</h2></div><a class="text-link" href="#URL_RUBRIQUE{actualites}">Toutes les publications ↗</a></section>
+  <B_articles><section class="article-grid"><BOUCLE_articles(ARTICLES){!par date}{0,6}><article class="article-card"><a class="card-link" href="#URL_ARTICLE"><div class="card-image">[(#LOGO_ARTICLE|image_reduire{640,360}|inserer_attribut{alt,#TITRE})]<span class="card-symbol">✳</span></div><p class="eyebrow">#DATE|affdate · #TYPE</p><h3>#TITRE</h3><p class="card-intro">#INTRODUCTION</p><span class="text-link">Lire et discuter ↗</span></a></article></BOUCLE_articles></section></B_articles>
+  <section class="empty-state"><span>✳</span><h3>La première parole est à écrire.</h3><p>Les publications apparaîtront ici après leur relecture collective.</p><a class="button" href="#URL_PAGE{proposer}">Proposer un texte</a></section><//B_articles>
+  <section class="manifesto"><p class="eyebrow">Un espace commun</p><h2>Écrire le présent.<br><em>Comprendre pour agir.</em></h2><p>Récits, analyses, outils et débats : faisons circuler les expériences et les savoirs, depuis les lycées et les lieux de lutte.</p><a class="button button-light" href="#URL_RUBRIQUE{ressources}">Explorer les ressources ↗</a></section>
+</main>
+<footer><a class="wordmark" href="#URL_SITE_SPIP"><span class="mark">Ⓐ</span> JEUNESSE LIBERTAIRE</a><p>Média participatif et d’éducation populaire.</p><div><a href="#URL_PAGE{mentions}">Mentions et licences</a><a href="#URL_PAGE{charte}">Charte éditoriale</a></div></footer>
+</body>
+</html>

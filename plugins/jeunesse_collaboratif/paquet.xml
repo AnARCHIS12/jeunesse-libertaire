@@ -1,0 +1,15 @@
+<paquet
+    prefix="jeunesse_collaboratif"
+    categorie="edition"
+    version="0.1.0"
+    etat="dev"
+    compatibilite="[4.4.0;4.4.*]"
+    schema="0.1.0"
+    logo=""
+>
+    <nom>Jeunesse Libertaire — collaboration éditoriale</nom>
+    <auteur>Collectif Jeunesse Libertaire</auteur>
+    <licence>GNU/GPL v3</licence>
+    <description>Socle d’identité éditoriale et de licence pour le média Jeunesse Libertaire.</description>
+    <pipeline nom="declarer_tables_objets_sql" inclure="base/jeunesse_collaboratif.php" />
+</paquet>
