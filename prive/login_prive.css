@@ -1,0 +1,137 @@
+/* Jeunesse Libertaire — personnalisation de la connexion SPIP */
+:root {
+  --jl-ink: #181715;
+  --jl-paper: #f6f3ed;
+  --jl-red: #d32920;
+  --jl-line: #d7d1c8;
+}
+
+.page_login {
+  min-height: 100vh;
+  background: var(--jl-paper);
+  color: var(--jl-ink);
+  font-family: Manrope, Arial, sans-serif;
+}
+
+.page_login .contenu_login {
+  width: min(92vw, 460px);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 42px 46px 34px;
+  background: #fffdf8;
+  border: 1px solid var(--jl-line);
+  box-shadow: 12px 12px 0 var(--jl-red);
+}
+
+.page_login .contenu_login::before {
+  content: "Ⓐ  JEUNESSE\A     LIBERTAIRE";
+  white-space: pre;
+  display: block;
+  margin-bottom: 36px;
+  color: var(--jl-ink);
+  font-size: 18px;
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -.04em;
+}
+
+.page_login .contenu_login::first-line {
+  color: var(--jl-red);
+}
+
+.page_login .formulaire_login {
+  width: auto;
+  max-width: none;
+  position: static;
+  transform: none;
+}
+
+.page_login .formulaire_spip fieldset {
+  padding: 0;
+  background: transparent;
+  color: var(--jl-ink);
+}
+
+.page_login .formulaire_spip fieldset .editer {
+  margin-bottom: 20px;
+}
+
+.page_login label {
+  color: var(--jl-ink);
+  text-shadow: none;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.page_login input.text,
+.page_login input.password {
+  height: auto;
+  margin-top: 8px;
+  padding: 13px 14px;
+  border: 1px solid var(--jl-line);
+  border-radius: 0;
+  background: var(--jl-paper);
+  color: var(--jl-ink);
+  font: 15px/1.4 Manrope, Arial, sans-serif;
+}
+
+.page_login input.text:focus,
+.page_login input.password:focus {
+  outline: 2px solid var(--jl-red);
+  outline-offset: 1px;
+  background: #fff;
+}
+
+.page_login p.details a,
+.page_login p.retour a {
+  color: var(--jl-ink);
+  text-shadow: none;
+}
+
+.page_login p.details a:hover,
+.page_login p.retour a:hover {
+  color: var(--jl-red);
+}
+
+.page_login .boutons input.submit {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 0;
+  background: var(--jl-red);
+  color: #fff;
+  font: 800 12px/1.2 Manrope, Arial, sans-serif;
+  letter-spacing: .02em;
+  cursor: pointer;
+}
+
+.page_login .boutons input.submit:hover,
+.page_login .boutons input.submit:focus {
+  background: var(--jl-ink);
+  color: #fff;
+}
+
+.page_login p.retour {
+  position: static;
+  margin: 28px 0 0;
+  padding: 0;
+  background: transparent;
+  text-align: center;
+}
+
+.page_login p.retour a {
+  font-size: 12px;
+}
+
+.page_login p.generator {
+  display: none;
+}
+
+@media (max-width: 560px) {
+  .page_login .contenu_login {
+    padding: 32px 26px 26px;
+    box-shadow: 7px 7px 0 var(--jl-red);
+  }
+}

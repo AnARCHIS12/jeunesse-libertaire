@@ -1,0 +1,26 @@
+<div class="formulaire_spip formulaire_proposer_article">
+  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+  [<div class="proposal-success"><p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p><p><strong>Conservez ce lien secret pour suivre la relecture et répondre :</strong></p><p><a href="#ENV{url_suivi}">#ENV{url_suivi}</a></p></div>]
+  <BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
+  <form method="post" action="#ENV{action}"><div>#ACTION_FORMULAIRE{#ENV{action}}
+    <input type="hidden" name="debut_formulaire" value="#ENV{debut_formulaire}">
+    <div class="hp" aria-hidden="true"><label>Site web <input type="text" name="website" value="" tabindex="-1" autocomplete="off"></label></div>
+    <div class="form-grid">
+      <label>Pseudonyme <span>*</span><input name="pseudo" required maxlength="128" value="#ENV{pseudo}"></label>
+      <label>Courriel privé <small>(facultatif)</small><input type="email" name="email" maxlength="255" value="#ENV{email}"></label>
+    </div>
+    [<p class="erreur_message">(#ENV**{erreurs/pseudo})</p>][<p class="erreur_message">(#ENV**{erreurs/email})</p>]
+    <label>Titre <span>*</span><input name="titre" required minlength="5" value="#ENV{titre}"></label>[<p class="erreur_message">(#ENV**{erreurs/titre})</p>]
+    <div class="form-grid">
+      <label>Type<select name="type_contribution"><option value="actualite">Actualité</option><option value="temoignage">Témoignage</option><option value="tribune">Tribune</option><option value="analyse">Analyse</option><option value="ressource">Ressource</option><option value="evenement">Événement</option></select></label>
+      <label>Rubrique <span>*</span><select name="id_rubrique" required><option value="">Choisir…</option><BOUCLE_r(DATA){source table,#ENV{rubriques}}><option value="#VALEUR{id_rubrique}"[(#ENV{id_rubrique}|=={#VALEUR{id_rubrique}}|oui) selected]>#VALEUR{titre}</option></BOUCLE_r></select></label>
+    </div>
+    [<p class="erreur_message">(#ENV**{erreurs/id_rubrique})</p>]
+    <label>Votre texte <span>*</span><textarea name="texte" rows="18" required minlength="100">#ENV{texte}</textarea></label>[<p class="erreur_message">(#ENV**{erreurs/texte})</p>]
+    <label>Sources et liens <textarea name="sources" rows="5">#ENV{sources}</textarea></label>
+    <label class="check"><input type="checkbox" name="licence" value="1" required[(#ENV{licence}|oui) checked]> <span>Je confirme avoir le droit de publier ce contenu et j’accepte sa diffusion sous licence CC BY-SA 4.0. <span>*</span></span></label>[<p class="erreur_message">(#ENV**{erreurs/licence})</p>]
+    <p class="privacy-note">Le courriel reste privé et sert uniquement à la relecture. Consultez la <a href="#URL_PAGE{confidentialite}">politique de confidentialité</a>.</p>
+    <button class="button" type="submit">Envoyer à la relecture ↗</button>
+  </div></form>
+  </BOUCLE_editable>
+</div>

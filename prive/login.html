@@ -1,0 +1,22 @@
+[(#REM) Page de connexion personnalisée Jeunesse Libertaire. ]
+#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<!DOCTYPE html>
+<html lang="#LANG" dir="#LANG_DIR">
+<head>
+  <title>Jeunesse Libertaire — Administration</title>
+  <meta charset="#CHARSET">
+  <meta name="robots" content="none">
+  <meta name="viewport" content="width=device-width">
+  #INSERT_HEAD_CSS
+  <link rel="stylesheet" href="[(#VAL{login_jeunesse.css}|find_in_theme|direction_css)]?v=2" type="text/css">
+</head>
+<body class="page_login[(#ENV{body_class})]">
+  <div class="contenu_login">
+    [(#ENV**{url}|non|ou{[(#ENV**{url}|match{^/?(.*/)?#PARAM{spip.routes.back_office}})]})
+      #MENU_LANG_ECRIRE
+    ]
+    #FORMULAIRE_LOGIN{#ENV{url}|sinon{#URL_ECRIRE{accueil}}}
+    <p class="retour"><a href="#URL_SITE_SPIP/">Retour au site public</a></p>
+  </div>
+</body>
+</html>

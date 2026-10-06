@@ -1,0 +1,60 @@
+services:
+  web:
+    build:
+      context: .
+    image: jeunesse-libertaire/spip:4.4.25
+    container_name: jeunesse-libertaire
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPIP_DB_HOST: db
+      SPIP_DB_NAME: ${MYSQL_DATABASE:-spip}
+      SPIP_SITE_NAME: ${SPIP_SITE_NAME:-Jeunesse Libertaire}
+      SPIP_SITE_ADDRESS: ${SPIP_SITE_ADDRESS:-http://localhost:8088}
+      SPIP_DB_LOGIN: ${MYSQL_USER:-spip}
+      SPIP_DB_PASS: ${MYSQL_PASSWORD:?Définir MYSQL_PASSWORD dans .env}
+      SPIP_AUTO_INSTALL: "1"
+      SPIP_ADMIN_LOGIN: ${SPIP_ADMIN_LOGIN:-admin}
+      SPIP_ADMIN_NAME: ${SPIP_ADMIN_NAME:-Admin}
+      SPIP_ADMIN_EMAIL: ${SPIP_ADMIN_EMAIL:-admin@localhost}
+      SPIP_ADMIN_PASS: ${SPIP_ADMIN_PASSWORD:?Définir SPIP_ADMIN_PASSWORD dans .env}
+    ports:
+      - "${WEB_BIND:-127.0.0.1}:${WEB_PORT:-8088}:80"
+    volumes:
+      - spip_data:/var/www/html
+      - ./squelettes:/var/www/html/squelettes:ro
+      - ./plugins/jeunesse_collaboratif:/var/www/html/plugins/auto/jeunesse_collaboratif:ro
+      - ./config:/var/www/html/config/jeunesse-libertaire:ro
+      - ./prive/login_prive.css:/var/www/html/prive/themes/spip/login_prive.css:ro
+      - ./prive/login_prive.css:/var/www/html/prive/themes/spip/login_jeunesse.css:ro
+      - ./prive/login.html:/var/www/html/prive/login.html:ro
+    networks: [front, back]
+
+  db:
+    image: mariadb:11.8
+    container_name: jeunesse-libertaire-db
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${MYSQL_DATABASE:-spip}
+      MARIADB_USER: ${MYSQL_USER:-spip}
+      MARIADB_PASSWORD: ${MYSQL_PASSWORD:?Définir MYSQL_PASSWORD dans .env}
+      MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Définir MYSQL_ROOT_PASSWORD dans .env}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks: [back]
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+networks:
+  front:
+  back:
+    internal: true
+
+volumes:
+  spip_data:
+  db_data:

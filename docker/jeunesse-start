@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euo pipefail
+
+if [ -f /var/www/html/config/connect.php ]; then
+    su -p www-data -s /bin/sh -c "cd /var/www/html && spip cache:vider --no-interaction"
+    # The container has no interactive terminal during startup.  Without
+    # --yes, SPIP asks for confirmation and exits when stdin is closed,
+    # which prevents Apache from starting and makes the container restart.
+    su -p www-data -s /bin/sh -c "cd /var/www/html && spip plugins:activer --yes jeunesse_collaboratif"
+    su -p www-data -s /bin/sh -c "cd /var/www/html && spip plugins:maj:bdd --no-interaction"
+fi
+
+exec apache2-foreground
