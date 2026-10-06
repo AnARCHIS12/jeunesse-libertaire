@@ -4,6 +4,23 @@ Média participatif d’éducation populaire basé sur SPIP, livré avec son th�
 
 ## Démarrage
 
+Installation automatique :
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/AnARCHIS12/jeunesse-libertaire/main/install.sh | bash
+```
+
+Le script affiche une interface guidée, télécharge le dépôt, génère trois secrets, crée `.env`, vérifie Docker et lance les conteneurs. Pour une installation sans questions :
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/AnARCHIS12/jeunesse-libertaire/main/install.sh | \
+  JL_INSTALL_DIR=/opt/jeunesse-libertaire \
+  JL_SITE_ADDRESS=https://jeunesse.example.org \
+  JL_WEB_PORT=8088 bash
+```
+
+Installation manuelle :
+
 ```bash
 cp .env.example .env
 # Remplacer les trois mots de passe et renseigner l’adresse publique du site.
