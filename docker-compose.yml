@@ -2,9 +2,7 @@ services:
   web:
     build:
       context: .
-      args:
-        SPIP_VERSION: ${SPIP_VERSION:-4.4}
-    image: jeunesse-libertaire/spip:4.4
+    image: jeunesse-libertaire/spip:4.4.25
     container_name: jeunesse-libertaire
     restart: unless-stopped
     depends_on:
@@ -14,6 +12,7 @@ services:
       SPIP_DB_HOST: db
       SPIP_DB_NAME: ${MYSQL_DATABASE:-spip}
       SPIP_SITE_NAME: ${SPIP_SITE_NAME:-Jeunesse Libertaire}
+      SPIP_SITE_ADDRESS: ${SPIP_SITE_ADDRESS:-http://localhost:8088}
       SPIP_DB_LOGIN: ${MYSQL_USER:-spip}
       SPIP_DB_PASS: ${MYSQL_PASSWORD:?Définir MYSQL_PASSWORD dans .env}
       SPIP_AUTO_INSTALL: "1"
@@ -31,7 +30,7 @@ services:
     networks: [front, back]
 
   db:
-    image: mariadb:11.4
+    image: mariadb:11.8
     container_name: jeunesse-libertaire-db
     restart: unless-stopped
     environment:
@@ -46,7 +45,7 @@ services:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 10s
       timeout: 5s
-      retries: 10
+      retries: 12
 
 networks:
   front:

@@ -1,0 +1,11 @@
+<BOUCLE_valide(CONDITION){si #ENV{invalide}|non}>
+<section class="tracking-card">
+  <p class="eyebrow">Proposition ##ENV{id_article}</p><h2>#ENV{titre}</h2>
+  <p><strong>État :</strong> [(#ENV{statut}|=={publie}|?{Publié,En relecture})]</p>
+  <div class="review-meter"><strong>#ENV{validations}/2 validations</strong><span>#ENV{blocages} demande(s) à résoudre</span></div>
+  <BOUCLE_avis(DATA){source table,#ENV{avis}}><div class="review-message"><strong>Équipe de relecture · [(#VALEUR{avis}|entites_html)]</strong>[<p>(#VALEUR{commentaire}|entites_html)</p>]</div></BOUCLE_avis>
+  <BOUCLE_echanges(DATA){source table,#ENV{echanges}}><div class="review-message[ (#VALEUR{origine}|entites_html)]"><strong>[(#VALEUR{origine}|=={auteur}|?{Vous,Équipe de relecture})]</strong><p>[(#VALEUR{texte}|entites_html)]</p><small>[(#VALEUR{date_message}|entites_html)]</small></div></BOUCLE_echanges>
+  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+  <form method="post" action="#ENV{action}"><div>#ACTION_FORMULAIRE{#ENV{action}}<label>Répondre à la relecture<textarea name="message" rows="6" required maxlength="5000">#ENV{message}</textarea></label>[<p class="erreur_message">(#ENV**{erreurs/message})</p>]<button class="button" type="submit">Envoyer la réponse</button></div></form>
+</section>
+</BOUCLE_valide><div class="tracking-card"><h2>Lien invalide ou expiré</h2><p>Vérifiez que vous avez copié le lien complet reçu après le dépôt.</p></div><//B_valide>

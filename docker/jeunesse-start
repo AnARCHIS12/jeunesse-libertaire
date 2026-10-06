@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euo pipefail
+
+if [ -f /var/www/html/config/connect.php ]; then
+    su -p www-data -s /bin/sh -c "cd /var/www/html && spip plugins:activer jeunesse_collaboratif"
+    su -p www-data -s /bin/sh -c "cd /var/www/html && spip plugins:maj:bdd"
+fi
+
+exec apache2-foreground

@@ -1,9 +1,8 @@
-ARG SPIP_VERSION=4.4
-FROM ipeos/spip:${SPIP_VERSION}
+FROM ipeos/spip:4.4.25
 
 LABEL org.opencontainers.image.title="Jeunesse Libertaire" \
       org.opencontainers.image.description="Média participatif d'éducation populaire basé sur SPIP" \
       org.opencontainers.image.licenses="GPL-3.0-or-later"
 
-# La version SPIP est paramétrée avec SPIP_VERSION. Le tag 4.4 suit les
-# correctifs de la branche ; épinglez un tag précis pour des builds figés.
+COPY --chmod=0755 docker/jeunesse-start /usr/local/bin/jeunesse-start
+CMD ["jeunesse-start"]

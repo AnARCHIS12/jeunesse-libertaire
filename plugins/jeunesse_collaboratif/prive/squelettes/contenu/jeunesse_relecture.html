@@ -1,0 +1,8 @@
+<h1 class="grostitre">Relecture collective</h1>
+<p>Une proposition est prête après <strong>deux validations</strong> et sans demande de modification ni opposition active. Une personne administratrice publie ensuite l’article.</p>
+<BOUCLE_propositions(ARTICLES){statut=prop}{!par date}>
+<section class="box"><h2><a href="[(#URL_ECRIRE{article,id_article=#ID_ARTICLE})]">#TITRE</a></h2><p><strong>#TYPE_CONTRIBUTION</strong> · proposé par #CONTRIBUTEUR_PSEUDO · [(#DATE|affdate)]</p><div class="texte">[(#TEXTE|couper{800})]</div>[<p><strong>Sources :</strong> (#SOURCES_CONTRIBUTION|propre)</p>]
+<B_votes><ul><BOUCLE_votes(JL_VALIDATIONS){id_article}><li><strong>[(#AVIS|entites_html)]</strong>[ — (#COMMENTAIRE|entites_html)]</li></BOUCLE_votes></ul></B_votes>
+#FORMULAIRE_AVIS_RELECTURE{#ID_ARTICLE}
+<B_rep><h3>Échanges</h3><BOUCLE_rep(JL_ECHANGES){id_article}{par date_message}><blockquote><strong>[(#ORIGINE|=={auteur}|?{Personne contributrice,Équipe})]</strong><br>[(#TEXTE|entites_html)]</blockquote></BOUCLE_rep></B_rep></section>
+</BOUCLE_propositions><p>Aucune proposition en attente.</p><//B_propositions>

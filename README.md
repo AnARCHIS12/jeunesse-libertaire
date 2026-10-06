@@ -1,32 +1,67 @@
 # Jeunesse Libertaire
 
-Base auto-hébergeable d’un média participatif d’éducation populaire, construite sur SPIP.
+Média participatif d’éducation populaire basé sur SPIP, livré avec son thème, son formulaire de contribution et son circuit de relecture collective.
 
 ## Démarrage
 
-1. Copiez `.env.example` vers `.env` et remplacez tous les mots de passe par des secrets uniques.
-2. Lancez `docker compose up -d --build`.
-3. Ouvrez `http://127.0.0.1:8088` sur le serveur ou configurez votre reverse proxy vers ce port.
-4. L’image configure SPIP automatiquement avec les identifiants fournis dans `.env`. Connectez-vous à `/ecrire/` avec le compte administrateur défini et changez son mot de passe après le premier accès.
-5. Dans SPIP, activez le plugin « Jeunesse Libertaire — collaboration éditoriale » et créez les rubriques « Actualités », « Témoignages », « Analyses » et « Ressources ».
+```bash
+cp .env.example .env
+# Remplacer les trois mots de passe et renseigner l’adresse publique du site.
+docker compose up -d --build
+```
 
-Le port est lié à localhost par défaut. Gardez MariaDB sur le réseau Docker privé. Le volume `spip_data` conserve les fichiers gérés par SPIP ; les squelettes et le plugin sont montés depuis le dossier du projet.
+Ouvrez ensuite l’adresse définie dans `SPIP_SITE_ADDRESS`. L’administration se trouve dans `/ecrire/`.
 
-## Ce qui est prêt
+Au premier démarrage, l’image :
 
-- Thème public responsive (accueil, article, rubrique) rouge, noir et crème.
-- Affichage de licence CC BY-SA 4.0 sur les articles et forum SPIP intégré.
-- Stack Docker avec MariaDB, volumes, réseau isolé, healthcheck et redémarrage automatique.
+- installe automatiquement SPIP et le compte administrateur ;
+- active le plugin `jeunesse_collaboratif` ;
+- crée les tables du circuit de relecture ;
+- crée les rubriques Actualités, Témoignages, Analyses, Ressources, Débats et Agenda ;
+- charge le thème rouge, noir et crème.
 
-## Ce qui demande encore un vrai travail avant ouverture publique
+## Parcours de contribution
 
-- Le formulaire public « proposer un texte » et ses contrôles anti-spam.
-- Un espace de relecture privé et des règles collectives de validation.
-- La vérification et la configuration de l’image de base exacte dans votre environnement ; la construction dépend de l’accès au registre.
-- La politique de données personnelles, consentement de licence au dépôt et charte de modération.
+1. La personne ouvre `/spip.php?page=proposer`.
+2. Elle dépose son texte, accepte la CC BY-SA 4.0 et reçoit un lien secret de suivi.
+3. L’article arrive avec le statut SPIP « proposé à l’évaluation ».
+4. Les rédacteur·ices et administrateur·ices ouvrent **Édition → Relecture collective**.
+5. Chaque personne donne un avis : validation, modifications demandées ou opposition motivée.
+6. Deux validations et aucun blocage rendent le texte prêt à publier.
+7. Une personne administratrice publie l’article depuis sa page SPIP.
 
-Le champ licence ajouté par le plugin est un socle technique ; activez-le d’abord sur une instance de test et sauvegardez la base avant une mise à jour. Le thème présume que les rubriques principales portent les identifiants d’URL `actualites`, `temoignages`, `analyses`, `ressources` ; adaptez les liens si votre configuration SPIP diffère.
+Le lien secret permet à la personne contributrice de lire les demandes et de répondre sans créer de compte. Il n’est pas indexé et seule son empreinte cryptographique est conservée en base.
 
-## Licence
+## Protections intégrées
 
-Le thème, le plugin et les fichiers d’infrastructure sont publiés sous GPL-3.0-or-later. Les articles publiés sur le site sont proposés sous CC BY-SA 4.0, sous réserve de l’accord de chaque auteur·ice. Les images peuvent avoir d’autres licences.
+- jeton CSRF fourni par les formulaires CVT de SPIP ;
+- champ invisible contre les robots ;
+- délai minimal de remplissage ;
+- cinq dépôts au maximum par heure et par empreinte de connexion ;
+- validation des champs côté serveur ;
+- courriel facultatif et jamais affiché publiquement ;
+- MariaDB inaccessible depuis l’extérieur du réseau Docker ;
+- port web lié à `127.0.0.1` par défaut ;
+- secrets réels exclus de Git par `.gitignore`.
+
+## Image de base vérifiée
+
+L’image est fixée sur `ipeos/spip:4.4.25`. La source amont publiée le 25 septembre 2026 embarque SPIP 4.4.25 sur PHP 8.4, vérifie l’archive SPIP avec le SHA-256 `99ba244ddf6a48d7d954dfc30db2cf4b84a2e481e47f5edd4b0c886673e0e281` et applique ses règles de durcissement Apache/PHP. MariaDB est fixée sur la branche LTS 11.8.
+
+## Pages fournies
+
+- `/spip.php?page=proposer` : dépôt d’un texte ;
+- `/spip.php?page=suivi-proposition&cle=…` : suivi privé ;
+- `/spip.php?page=charte` : règles de publication et de modération ;
+- `/spip.php?page=confidentialite` : politique de données personnelles ;
+- `/spip.php?page=mentions` : licences et mentions à compléter.
+
+Avant l’ouverture publique, complétez dans `squelettes/mentions.html` l’identité du collectif, son adresse de contact et l’hébergeur. Ces informations dépendent de votre structure et ne peuvent pas être inventées dans l’image.
+
+## Sauvegardes
+
+Sauvegardez les volumes `db_data` et `spip_data`. Testez une restauration avant toute mise à jour majeure.
+
+## Licences
+
+Le thème, le plugin et l’infrastructure sont sous GPL-3.0-or-later. Les textes proposés sont sous CC BY-SA 4.0 avec consentement explicite. Les images et documents peuvent porter une licence distincte.
