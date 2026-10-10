@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forum & Débats — Jeunesse Libertaire</title>
+  <meta name="description" content="Espace d'échange, de débat et de discussion des luttes lycéennes et étudiantes.">
+  <link rel="stylesheet" href="[(#CHEMIN{css/jeunesse.css})]?v=5">
+</head>
+<body>
+<INCLURE{fond=inclure/top-bar} />
+<header class="site-header">
+  <a class="wordmark" href="#URL_SITE_SPIP"><span class="mark">Ⓐ</span> JEUNESSE<br>LIBERTAIRE</a>
+  <nav aria-label="Navigation principale">
+    <BOUCLE_nav_a(RUBRIQUES){titre=Actualités}{0,1}><a href="#URL_RUBRIQUE">Actualités</a></BOUCLE_nav_a>
+    <BOUCLE_nav_t(RUBRIQUES){titre=Témoignages}{0,1}><a href="#URL_RUBRIQUE">Témoignages</a></BOUCLE_nav_t>
+    <BOUCLE_nav_n(RUBRIQUES){titre=Analyses}{0,1}><a href="#URL_RUBRIQUE">Analyses</a></BOUCLE_nav_n>
+    <BOUCLE_nav_d(RUBRIQUES){titre=Débats}{0,1}><a href="#URL_RUBRIQUE">Débats</a></BOUCLE_nav_d>
+    <BOUCLE_nav_r(RUBRIQUES){titre=Ressources}{0,1}><a href="#URL_RUBRIQUE">Ressources</a></BOUCLE_nav_r>
+    <a href="#URL_PAGE{forum}" class="active">Forum</a>
+  </nav>
+  <a class="button button-small" href="#URL_PAGE{proposer}">Proposer un texte ↗</a>
+</header>
+
+<main class="listing">
+  <p class="eyebrow">Espace d'échange public</p>
+  <h1>Forum &amp; <em>Débats.</em></h1>
+  <p class="intro">Retrouvez ici les discussions ouvertes et les échanges militants sous les articles et thématiques du média.</p>
+
+  <B_discussions>
+  <section class="forum-grid">
+    <BOUCLE_discussions(ARTICLES){!par date}{0,20}>
+    <article class="forum-card">
+      <div class="forum-card-header">
+        <span class="eyebrow">[(#DATE|affdate)]</span>
+        <h3><a href="#URL_ARTICLE#discussion">#TITRE</a></h3>
+      </div>
+      <p class="forum-card-intro">#INTRODUCTION</p>
+      <div class="forum-card-footer">
+        <BOUCLE_nb_comm(FORUMS){id_article}{plat}>
+        </BOUCLE_nb_comm>
+        <span class="comment-count">[(#TOTAL_BOUCLE|singulier_pluriel{1 message,#TOTAL_BOUCLE messages,aucun message})]</span>
+        <//B_nb_comm>
+        <a class="button button-small" href="#URL_ARTICLE#discussion">Participer au débat ↗</a>
+      </div>
+    </article>
+    </BOUCLE_discussions>
+  </section>
+  </B_discussions>
+  <div class="empty-state">
+    <span>✳</span>
+    <h3>Aucun débat ouvert pour le moment.</h3>
+    <p>Les discussions apparaîtront dès la publication des premiers articles.</p>
+  </div>
+  <//B_discussions>
+</main>
+
+<footer>
+  <a class="wordmark" href="#URL_SITE_SPIP"><span class="mark">Ⓐ</span> JEUNESSE LIBERTAIRE</a>
+  <p>Média participatif et d’éducation populaire.</p>
+  <div>
+    <a href="#URL_PAGE{mentions}">Mentions et licences</a>
+    <a href="#URL_PAGE{charte}">Charte éditoriale</a>
+  </div>
+</footer>
+</body>
+</html>
