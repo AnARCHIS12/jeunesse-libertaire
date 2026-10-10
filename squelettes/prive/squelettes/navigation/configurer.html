@@ -1,0 +1,7 @@
+#SET{nav,#INCLURE{fond=prive/squelettes/inclure/menu-navigation,
+	menu=menu_configuration,
+	bloc=navigation,
+	env}}
+[(#GET{nav}|match{execfound}|oui)
+#GET{nav}
+]

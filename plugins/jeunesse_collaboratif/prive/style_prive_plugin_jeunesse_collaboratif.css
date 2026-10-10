@@ -1,0 +1,4 @@
+/* Masquer l'encart d'avertissement de configuration SPIP */
+.page_configurer .lat .box.info {
+    display: none !important;
+}
