@@ -3,8 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mentions et licences — Jeunesse Libertaire</title>
-  <link rel="stylesheet" href="[(#CHEMIN{css/jeunesse.css})]?v=3">
+  <title>Mentions et licences — [(#NOM_SITE_SPIP|textebrut)]</title>
+  #SET{mentions_og_titre,#VAL{'Mentions légales & Licences libres — '}|concat{#NOM_SITE_SPIP|textebrut}}
+  #SET{mentions_og_url,#URL_PAGE{mentions}}
+  #SET{mentions_og_image,#VAL|jeunesse_og_image_site}
+  #SET{mentions_og_desc,#VAL{"Mentions légales, licences libres GPLv3 et CC BY-SA 4.0, hébergement et principes techniques."}}
+  [(#INCLURE{fond=inclure/head_meta, og_titre=#GET{mentions_og_titre}, og_description=#GET{mentions_og_desc}, og_url=#GET{mentions_og_url}, og_type=website, og_image=#GET{mentions_og_image}, lang=fr})]
+  <link rel="stylesheet" href="[(#CHEMIN{css/jeunesse.css})]?v=4">
 </head>
 <body>
   <INCLURE{fond=inclure/top-bar} />

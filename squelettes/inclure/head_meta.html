@@ -1,0 +1,27 @@
+[(#REM) Métadonnées Open Graph, Twitter Cards et Référencement éthique ]
+#SET{page_titre,#ENV{og_titre}|sinon{#NOM_SITE_SPIP}}
+#SET{defaut_desc,#VAL{"Média participatif d'émancipation collective, d'éducation populaire et de combat des luttes lycéennes et étudiantes."}}
+#SET{page_desc,#ENV{og_description}|sinon{#DESCRIPTIF_SITE_SPIP}|sinon{#GET{defaut_desc}}}
+#SET{page_url,#ENV{og_url}|sinon{#URL_SITE_SPIP}}
+#SET{page_type,#ENV{og_type,website}}
+#SET{page_image,#ENV{og_image}|sinon{#VAL|jeunesse_og_image_site}}
+
+<meta name="description" content="[(#GET{page_desc}|textebrut|couper{200}|attribut_html)]">
+<link rel="canonical" href="[(#GET{page_url}|url_absolue)]">
+
+<!-- Open Graph / Facebook / Mastodon / Signal / WhatsApp -->
+<meta property="og:site_name" content="[(#NOM_SITE_SPIP|textebrut|attribut_html)]">
+<meta property="og:type" content="[(#GET{page_type}|attribut_html)]">
+<meta property="og:title" content="[(#GET{page_titre}|textebrut|attribut_html)]">
+<meta property="og:description" content="[(#GET{page_desc}|textebrut|couper{200}|attribut_html)]">
+<meta property="og:url" content="[(#GET{page_url}|url_absolue)]">
+<meta property="og:image" content="[(#GET{page_image}|url_absolue)]">
+<meta property="og:image:alt" content="[(#GET{page_titre}|textebrut|attribut_html)]">
+<meta property="og:locale" content="[(#ENV{lang,fr})_FR]">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="[(#GET{page_titre}|textebrut|attribut_html)]">
+<meta name="twitter:description" content="[(#GET{page_desc}|textebrut|couper{200}|attribut_html)]">
+<meta name="twitter:image" content="[(#GET{page_image}|url_absolue)]">
+<meta name="twitter:image:alt" content="[(#GET{page_titre}|textebrut|attribut_html)]">

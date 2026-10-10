@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jeunesse Libertaire — Média participatif</title>
-  <meta name="description" content="Média participatif des luttes lycéennes et de l’éducation populaire.">
-  <link rel="stylesheet" href="[(#CHEMIN{css/jeunesse.css})]?v=3">
+  <title>[(#NOM_SITE_SPIP|textebrut)] — Média participatif</title>
+  [(#INCLURE{fond=inclure/head_meta, og_titre=[(#NOM_SITE_SPIP|textebrut) — Média participatif], og_description=[(#DESCRIPTIF_SITE_SPIP|textebrut)], og_url=#URL_SITE_SPIP, og_type=website, og_image=[(#VAL|jeunesse_og_image_site)], lang=fr})]
+  <link rel="stylesheet" href="[(#CHEMIN{css/jeunesse.css})]?v=4">
 </head>
 <body>
 <INCLURE{fond=inclure/top-bar} />

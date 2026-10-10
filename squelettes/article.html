@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>[(#TITRE|textebrut)] — Jeunesse Libertaire</title>
-  [<meta name="description" content="(#INTRODUCTION|couper{160}|attribut_html)">]
+  <title>[(#TITRE|textebrut)] — [(#NOM_SITE_SPIP|textebrut)]</title>
+  [(#INCLURE{fond=inclure/head_meta, og_titre=#TITRE, og_description=[(#INTRODUCTION|textebrut|couper{200})], og_url=#URL_ARTICLE, og_type=article, og_image=[(#ID_ARTICLE|jeunesse_og_image_article{#TITRE})], lang=#LANG})]
   <link rel="stylesheet" href="[(#CHEMIN{css/jeunesse.css})]?v=4">
 </head>
 <body>

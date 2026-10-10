@@ -4,8 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Forum & Débats — Jeunesse Libertaire</title>
-  <meta name="description" content="Espace d'échange direct, de débat et de discussion des luttes lycéennes et étudiantes.">
+  <title>Forum & Débats — [(#NOM_SITE_SPIP|textebrut)]</title>
+  #SET{forum_og_titre,#VAL{'Agora & Forum des débats — '}|concat{#NOM_SITE_SPIP|textebrut}}
+  #SET{forum_og_image,#GET{id_agora}|jeunesse_og_image_article{Agora}}
+  #SET{forum_og_url,#URL_PAGE{forum}}
+  #SET{forum_og_desc,#VAL{"Espace permanent d’échange direct, de débat et de discussion des luttes lycéennes et étudiantes."}}
+  [(#INCLURE{fond=inclure/head_meta, og_titre=#GET{forum_og_titre}, og_description=#GET{forum_og_desc}, og_url=#GET{forum_og_url}, og_type=website, og_image=#GET{forum_og_image}, lang=fr})]
   <link rel="stylesheet" href="[(#CHEMIN{css/jeunesse.css})]?v=8">
 </head>
 <body>

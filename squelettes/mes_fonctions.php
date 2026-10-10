@@ -117,4 +117,74 @@ function filtre_jeunesse_hero_logo_dist($logo = '', $titre = '', $id_article = 0
     return '';
 }
 
+/**
+ * Retourne l'URL absolue de l'image de partage (Open Graph / Twitter Card) pour un article.
+ * Recherche en priorité le logo propre de l'article, puis l'illustration de fallback (Agora, Bienvenue),
+ * et enfin le logo général du site.
+ *
+ * @param int $id_article Identifiant de l'article
+ * @param string $titre Titre de l'article
+ * @return string URL absolue complète
+ */
+function filtre_jeunesse_og_image_article_dist($id_article = 0, $titre = '') {
+    include_spip('inc/filtres');
+    include_spip('public/quete');
+
+    $id_article = intval($id_article);
+
+    // 1. Logo propre de l'article
+    if ($id_article > 0) {
+        $logo = quete_logo('id_article', 'ON', $id_article, 0, false);
+        if (is_array($logo) && !empty($logo['src'])) {
+            return url_absolue($logo['src']);
+        }
+        if (file_exists(_DIR_IMG . 'arton' . $id_article . '.png')) {
+            return url_absolue(_DIR_IMG . 'arton' . $id_article . '.png');
+        }
+    }
+
+    // 2. Détection par thématique / titre (Agora, Débat, Tribune, Bienvenue)
+    if (stripos($titre, 'Agora') !== false || stripos($titre, 'Tribune') !== false || stripos($titre, 'Débat') !== false) {
+        $src = find_in_path('agora-miniature.png') ?: 'squelettes/agora-miniature.png';
+        if ($id_article && !file_exists(_DIR_IMG . 'arton' . $id_article . '.png') && file_exists($src)) {
+            @copy($src, _DIR_IMG . 'arton' . $id_article . '.png');
+        }
+        return url_absolue($src);
+    }
+
+    if (stripos($titre, 'Bienvenue') !== false) {
+        $src = find_in_path('bienvenue-miniature.png') ?: 'squelettes/bienvenue-miniature.png';
+        if ($id_article && !file_exists(_DIR_IMG . 'arton' . $id_article . '.png') && file_exists($src)) {
+            @copy($src, _DIR_IMG . 'arton' . $id_article . '.png');
+        }
+        return url_absolue($src);
+    }
+
+    // 3. Repli sur le logo du site
+    return filtre_jeunesse_og_image_site_dist();
+}
+
+/**
+ * Retourne l'URL absolue du logo de site officiel pour les métadonnées de partage.
+ *
+ * @return string URL absolue complète
+ */
+function filtre_jeunesse_og_image_site_dist() {
+    include_spip('inc/filtres');
+    include_spip('public/quete');
+
+    // Logo du site dans IMG (siteon0.png)
+    if (file_exists(_DIR_IMG . 'siteon0.png')) {
+        return url_absolue(_DIR_IMG . 'siteon0.png');
+    }
+
+    // Logo dans squelettes/assets ou assets
+    $path = find_in_path('assets/avatar-reseaux-noir.png') ?: (find_in_path('avatar-reseaux-noir.png') ?: 'squelettes/assets/avatar-reseaux-noir.png');
+    if (file_exists($path) && !file_exists(_DIR_IMG . 'siteon0.png')) {
+        @copy($path, _DIR_IMG . 'siteon0.png');
+    }
+
+    return url_absolue($path);
+}
+
 

@@ -1,2 +1,16 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Proposer un texte — Jeunesse Libertaire</title><link rel="stylesheet" href="[(#CHEMIN{css/jeunesse.css})]?v=3"></head><body><INCLURE{fond=inclure/top-bar} />
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proposer un texte — [(#NOM_SITE_SPIP|textebrut)]</title>
+  #SET{prop_og_titre,#VAL{'Proposer une contribution — '}|concat{#NOM_SITE_SPIP|textebrut}}
+  #SET{prop_og_url,#URL_PAGE{proposer}}
+  #SET{prop_og_image,#VAL|jeunesse_og_image_site}
+  #SET{prop_og_desc,#VAL{"Espace public de proposition directe de textes, analyses et témoignages pour les luttes lycéennes et étudiantes."}}
+  [(#INCLURE{fond=inclure/head_meta, og_titre=#GET{prop_og_titre}, og_description=#GET{prop_og_desc}, og_url=#GET{prop_og_url}, og_type=website, og_image=#GET{prop_og_image}, lang=fr})]
+  <link rel="stylesheet" href="[(#CHEMIN{css/jeunesse.css})]?v=4">
+</head>
+<body>
+<INCLURE{fond=inclure/top-bar} />
 <header class="site-header"><a class="wordmark" href="#URL_SITE_SPIP"><span class="mark">Ⓐ</span> JEUNESSE<br>LIBERTAIRE</a><nav><a href="#URL_SITE_SPIP">Accueil</a><a href="#URL_PAGE{charte}">Charte</a><a href="#URL_PAGE{confidentialite}">Confidentialité</a></nav></header><main class="contribution-page"><p class="eyebrow">Contribution ouverte</p><h1>Proposer<br><em>un texte.</em></h1><p class="intro">Votre proposition est transmise à l’équipe de relecture. Elle ne devient publique qu’après échange et validation collective.</p>#FORMULAIRE_PROPOSER_ARTICLE</main><footer><a class="wordmark" href="#URL_SITE_SPIP">Ⓐ JEUNESSE LIBERTAIRE</a><p>Les textes sont proposés sous CC BY-SA 4.0.</p></footer></body></html>
