@@ -1,16 +1,66 @@
-# Jeunesse Libertaire
+<p align="center">
+  <img src="assets/avatar-reseaux-noir.png" alt="Jeunesse Libertaire" width="120" height="120" />
+</p>
 
-Média participatif d’éducation populaire basé sur SPIP, livré avec son thème, son formulaire de contribution et son circuit de relecture collective.
+<h1 align="center">JEUNESSE LIBERTAIRE</h1>
 
-## Démarrage
+<p align="center">
+  <strong>Partoprena amaskomunikilo por kolektiva emancipiĝo, populara edukado kaj mezlernejaj kaj studentaj luktoj.</strong>
+</p>
 
-Installation automatique :
+<p align="center">
+  <a href="README.md"><b>Esperanto</b></a> •
+  <a href="README.fr.md">Français</a> •
+  <a href="README.en.md">English</a> •
+  <a href="README.es.md">Español</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/AnARCHIS12/jeunesse-libertaire"><img src="https://img.shields.io/badge/status-aktiva-10b981?style=flat-square" alt="Stato" /></a>
+  <a href="https://www.spip.net"><img src="https://img.shields.io/badge/SPIP-4.4.28-c92a2a?style=flat-square" alt="SPIP Versio" /></a>
+  <a href="https://www.php.net"><img src="https://img.shields.io/badge/PHP-8.4-4f5b93?style=flat-square" alt="PHP Versio" /></a>
+  <a href="https://mariadb.org"><img src="https://img.shields.io/badge/MariaDB-11.8_LTS-003545?style=flat-square" alt="MariaDB Versio" /></a>
+  <a href="https://contrib.spip.net/NoSPAM"><img src="https://img.shields.io/badge/sekureco-NoSpam_3.0.1-10b981?style=flat-square" alt="NoSpam Sekureco" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/kodo-GPL--3.0--or--later-blue?style=flat-square" alt="Koda Permesilo" /></a>
+  <a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://img.shields.io/badge/enhavo-CC--BY--SA--4.0-lightgrey?style=flat-square" alt="Enhava Permesilo" /></a>
+</p>
+
+---
+
+## Superrigardo
+
+**Jeunesse Libertaire** estas memstara plurmedia platformo kreita de kaj por luktanta junularo. Konstruita sur la libera bazo SPIP 4.4 en plifortigita kontenera medio, ĝi kunigas publikan formularon por proponi artikolojn, malferman Agoron kaj rektan diskutspacon por la kunbatalantaj gejunuloj (kompaninoj kaj kompanoj), kolektivan relegadan cirkviton sen deviga konto-kreado, kaj altnivelan kontraŭspaman protekton sen eksteraj servoj aŭ komerca spurado.
+
+- **Plena memstareco kaj Nul Eksteraj CDN-oj** : neniu voko al fermitaj proprietaj serviloj (Google, Cloudflare, ktp.). Ĉiuj skriptoj, stiloj kaj vektoraj bildoj estas loke gastigitaj kaj funkcias en fermita reto aŭ senrete.
+- **Modereco kaj Kruda Estetiko** : fasonado inspirita de la avangarda anarkiisma gazetaro (profunda nigro `#0f0f10`, varma papero `#f4efe8`, vigla ruĝo `#d32920`).
+- **Kolektiva Emancipiĝo** : horizontalaj iloj garantiantaj anonimecon, eldonliberecon kaj foreston de burokratia hierarkio.
+
+---
+
+## Ĉefaj Trajtoj
+
+| Modulo | Priskribo | Sekureco kaj Etiko |
+| :--- | :--- | :--- |
+| **Rekta Propono** | Depono de tekstoj, atestoj, strikanalizoj kaj raportoj de ĝeneralaj asembleoj. | Kontrolo kontraŭ robotoj en 4 sekundoj, nevidebla kaptilo (*honeypot*), IP-limigilo ĉifrita per SHA-256. |
+| **Sekreta Spurado** | Privata sekreta ligilo donita al la verkinto por dialogi kun la relegteamo. | Neniu konto postulata, sekreta ŝlosilo haketita en datumbazo, ne indeksita de serĉiloj. |
+| **Agora kaj Libera Tribuno** | Konstanta kaj horizontala debata spaco ligita al la rubriko *Débats*. | Kolektiva antaŭa modereco, interaga faldebla elemento `<details>`, nul perantoj. |
+| **NoSpam Protekto** | Oficiala kromaĵo NoSpam v3.0.1 kun tempaj ĵetonoj kaj falsaj kampoj. | 100% loka, neniu altrudita vida puzlo aŭ captcha, plena alirebleco. |
+| **Kolektiva Relegado** | Privata interfaco por kolektiva taksado fare de la redakta kolektivo. | Kvorumo de du pozitivaj validigoj postulata antaŭ fakta publikigo. |
+| **Lokaj Ilustraĵoj** | Dokumentaj miniaturoj kreitaj loke kaj aŭtomate sinkronigitaj (`IMG/arton*.png`). | Neniu ekstera nuba stokado, optimumigitaj formatoj WebP/PNG. |
+
+---
+
+## Rapida Ekfunkciigo
+
+### 1. Aŭtomata instalado per unu komando
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/AnARCHIS12/jeunesse-libertaire/main/install.sh | bash
 ```
 
-Le script affiche une interface guidée, télécharge le dépôt, génère trois secrets, crée `.env`, vérifie Docker et lance les conteneurs. Pour une installation sans questions :
+La skripto instalas la dependecojn, hazarde generas tri kriptografiajn sekretojn, kreas la dosieron `.env`, lanĉas la Docker-reton kaj pravalorizas la datumbazon.
+
+Por neinteraga instalado en produktado :
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/AnARCHIS12/jeunesse-libertaire/main/install.sh | \
@@ -19,66 +69,108 @@ curl -fsSL https://raw.githubusercontent.com/AnARCHIS12/jeunesse-libertaire/main
   JL_WEB_PORT=8088 bash
 ```
 
-Installation manuelle :
+### 2. Mana deplojo per Docker Compose
 
 ```bash
+# Kloni la deponejon
+git clone https://github.com/AnARCHIS12/jeunesse-libertaire.git
+cd jeunesse-libertaire
+
+# Agordi la medion
 cp .env.example .env
-# Remplacer les trois mots de passe et renseigner l’adresse publique du site.
+# Difini la pasvortojn kaj publikan URL en .env
+
+# Lanĉi la servojn
 docker compose up -d --build
+
+# Aktivigi la kromaĵon NoSpam
+echo yes | docker exec -i jeunesse-libertaire spip plugins:activer nospam
+
+# Malplenigi la SPIP-kaŝmemoron
+docker exec jeunesse-libertaire spip cache:vider
 ```
 
-Ouvrez ensuite l’adresse définie dans `SPIP_SITE_ADDRESS`. L’administration se trouve dans `/ecrire/`.
+La publika retejo estas alirebla ĉe la adreso difinita en `SPIP_SITE_ADDRESS` (defaŭlte `http://localhost:8088`), kaj la administra interfaco ĉe `/ecrire/`.
 
-Au premier démarrage, l’image :
+---
 
-- installe automatiquement SPIP et le compte administrateur ;
-- active le plugin `jeunesse_collaboratif` ;
-- crée les tables du circuit de relecture ;
-- crée les rubriques Actualités, Témoignages, Analyses, Ressources, Débats et Agenda ;
-- charge le thème rouge, noir et crème.
+## Teknika Strukturo
 
-## Parcours de contribution
+```
+jeunesse-libertaire/
+├── assets/                          • Grafikaj rimedoj, emblemoj Ⓐ kaj vidaĵoj
+│   ├── agora-miniature.png          • Oficiala miniaturo por la Agora kaj Libera Tribuno
+│   ├── bienvenue-miniature.png      • Bonvena ilustraĵo de la amaskomunikilo
+│   ├── avatar-reseaux-noir.png      • Monokromata cirkla emblemo Ⓐ
+│   └── avatar-reseaux-rouge.png     • Ruĝ-nigra cirkla emblemo Ⓐ
+├── config/                          • Sistemaj agordaj dosieroj de SPIP
+├── plugins/
+│   ├── jeunesse_collaboratif/       • Kerna logiko : propono, sekreta spurado kaj relegado
+│   │   ├── base/                    • Datumbazaj skemoj
+│   │   ├── formulaires/             • Formularaj traktiloj
+│   │   └── prive/                   • Kolektiva relegada panelo
+│   └── nospam/                      • Oficiala kromaĵo NoSpam v3.0.1
+├── squelettes/                      • Prezentaj ŝablonoj (HTML5 / SPIP)
+│   ├── css/jeunesse.css             • Memstara stildosiero sen eksteraj ligiloj
+│   ├── sommaire.html                • Ĉefpaĝo kun eldona fluo kaj rubrikoj
+│   ├── article.html                 • Plena artikola vido kaj komentoj
+│   ├── forum.html                   • Malfermita Agora, interaga faldfolio kaj liberaj debatoj
+│   ├── rubrique.html                • Rubrikaj listoj (Aktualaĵoj, Debatoj, ktp.)
+│   ├── proposer.html                • Publika formularo por proponi artikolon
+│   ├── suivi-proposition.html       • Privata komunikspaco inter verkinto kaj kolektivo
+│   └── mes_fonctions.php            • Propraj SPIP-filtriloj kaj aŭtomataj miniaturoj
+├── docker-compose.yml               • Kontenera orkestrado (SPIP + MariaDB)
+├── Dockerfile                       • Plifortigita SPIP-bildo
+└── install.sh                       • Aŭtonoma instala skripto
+```
 
-1. La personne ouvre `/spip.php?page=proposer`.
-2. Elle dépose son texte, accepte la CC BY-SA 4.0 et reçoit un lien secret de suivi.
-3. L’article arrive avec le statut SPIP « proposé à l’évaluation ».
-4. Les rédacteur·ices et administrateur·ices ouvrent **Édition → Relecture collective**.
-5. Chaque personne donne un avis : validation, modifications demandées ou opposition motivée.
-6. Deux validations et aucun blocage rendent le texte prêt à publier.
-7. Une personne administratrice publie l’article depuis sa page SPIP.
+---
 
-Le lien secret permet à la personne contributrice de lire les demandes et de répondre sans créer de compte. Il n’est pas indexé et seule son empreinte cryptographique est conservée en base.
+## Cirkvito de Propono kaj Relegado
 
-## Protections intégrées
+```
+[Vizitanto] ──› Depono de teksto (/spip.php?page=proposer)
+                     │
+                     ├──› Generita privata sekreta ŝlosilo
+                     └──› Artikolo registrita kun statuso « prop » (Relegado)
+                                    │
+                                    ▼
+                     [Kolektiva Relegada Komitato]
+                     (Édition → Relecture collective)
+                                    │
+                     ├── Horizontalaj interŝanĝoj kun la verkinto
+                     ├── Kolektiva voĉdono (Interkonsento / Amendoj / Kontraŭstaro)
+                     │
+                     ▼
+              [Kvorumo atingita : 2 klaraj validigoj]
+                     │
+                     ▼
+               Publikigo en la retejo
+```
 
-- jeton CSRF fourni par les formulaires CVT de SPIP ;
-- champ invisible contre les robots ;
-- délai minimal de remplissage ;
-- cinq dépôts au maximum par heure et par empreinte de connexion ;
-- validation des champs côté serveur ;
-- courriel facultatif et jamais affiché publiquement ;
-- MariaDB inaccessible depuis l’extérieur du réseau Docker ;
-- port web lié à `127.0.0.1` par défaut ;
-- secrets réels exclus de Git par `.gitignore`.
+1. **Depono** : la kontribuanto indikas sian pseŭdonimon, sian tekston, konfirmas la liberan permesilon CC BY-SA 4.0 kaj ricevas sekretan ligilon.
+2. **Kolektiva relegado** : la membroj de la kolektivo ekzamenas la proponon en la dediĉita spaco.
+3. **Horizontala interŝanĝo** : la sekreta ligilo ebligas dialogi kun la relegteamo sen bezono krei konton sur la servilo.
+4. **Publikigo** : la teksto publikiĝas nur kiam la kolektiva kvorumo estas plenumita.
 
-## Image de base vérifiée
+---
 
-L’image est fixée sur `ipeos/spip:4.4.25`. La source amont publiée le 25 septembre 2026 embarque SPIP 4.4.25 sur PHP 8.4, vérifie l’archive SPIP avec le SHA-256 `99ba244ddf6a48d7d954dfc30db2cf4b84a2e481e47f5edd4b0c886673e0e281` et applique ses règles de durcissement Apache/PHP. MariaDB est fixée sur la branche LTS 11.8.
+## Servilaj Ĝisdatigoj
 
-## Pages fournies
+Por apliki la plej novajn plibonigojn sur via produktada servilo :
 
-- `/spip.php?page=proposer` : dépôt d’un texte ;
-- `/spip.php?page=suivi-proposition&cle=…` : suivi privé ;
-- `/spip.php?page=charte` : règles de publication et de modération ;
-- `/spip.php?page=confidentialite` : politique de données personnelles ;
-- `/spip.php?page=mentions` : licences et mentions à compléter.
+```bash
+cd /vojo/al/jeunesse-libertaire
+git pull origin main
+docker compose up -d
+echo yes | docker exec -i jeunesse-libertaire spip plugins:activer nospam
+docker exec jeunesse-libertaire spip cache:vider
+```
 
-Avant l’ouverture publique, complétez dans `squelettes/mentions.html` l’identité du collectif, son adresse de contact et l’hébergeur. Ces informations dépendent de votre structure et ne peuvent pas être inventées dans l’image.
+---
 
-## Sauvegardes
+## Permesiloj
 
-Sauvegardez les volumes `db_data` et `spip_data`. Testez une restauration avant toute mise à jour majeure.
-
-## Licences
-
-Le thème, le plugin et l’infrastructure sont sous GPL-3.0-or-later. Les textes proposés sont sous CC BY-SA 4.0 avec consentement explicite. Les images et documents peuvent porter une licence distincte.
+- **Fontkodo, ŝablonoj kaj infrastrukturo** : [GNU General Public License v3.0 or later (GPL-3.0-or-later)](LICENSE).
+- **Tekstaj enhavoj kaj artikoloj** : [Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/).
+- **Fotoj kaj dokumentoj** : laŭ la specifaj permesiloj indikitaj sur ĉiu havaĵo.
