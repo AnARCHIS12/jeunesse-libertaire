@@ -34,8 +34,7 @@
     <article class="article-card">
       <a class="card-link" href="#URL_ARTICLE">
         <div class="card-image">
-          [(#LOGO_ARTICLE|oui)[(#LOGO_ARTICLE|image_reduire{640,360}|inserer_attribut{alt,#TITRE})]]
-          [(#LOGO_ARTICLE|non)<span class="card-symbol">✳</span>]
+          [(#LOGO_ARTICLE|image_reduire{640,360}|inserer_attribut{alt,#TITRE}|jeunesse_card_logo{#TITRE,#ID_ARTICLE})]
         </div>
         <p class="eyebrow">[(#DATE|affdate)][ (#TYPE_CONTRIBUTION|oui)· #TYPE_CONTRIBUTION]</p>
         <h3>#TITRE</h3>

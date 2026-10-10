@@ -35,11 +35,7 @@
     Par <BOUCLE_auteur(AUTEURS){id_article}{0,1}>#NOM</BOUCLE_auteur>[(#CONTRIBUTEUR_PSEUDO|sinon{Collectif Jeunesse Libertaire})]<//B_auteur> · [(#DATE|affdate)]
   </div>
 
-  [(#LOGO_ARTICLE|oui)
-  <div class="article-hero-image">
-    [(#LOGO_ARTICLE|image_reduire{1000,0}|inserer_attribut{alt,#TITRE})]
-  </div>
-  ]
+  [(#LOGO_ARTICLE|image_reduire{1000,0}|inserer_attribut{alt,#TITRE}|jeunesse_hero_logo{#TITRE,#ID_ARTICLE})]
 
   <div class="article-body">
     #TEXTE

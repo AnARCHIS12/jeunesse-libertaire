@@ -49,3 +49,72 @@ function filtre_jeunesse_id_agora_dist($dummy = '') {
 
     return intval($id);
 }
+
+/**
+ * Filtre résilient pour l'affichage du logo ou miniature d'une carte d'article
+ * Garantit qu'un article d'Agora ou de Bienvenue affiche toujours son illustration,
+ * même si le logo SPIP n'a pas encore été synchronisé dans IMG/arton{id}.png.
+ *
+ * @param string $logo Tag img calculé par SPIP (peut être vide)
+ * @param string $titre Titre de l'article
+ * @param int $id_article Identifiant de l'article
+ * @return string
+ */
+function filtre_jeunesse_card_logo_dist($logo = '', $titre = '', $id_article = 0) {
+    if (!empty(trim($logo))) {
+        return $logo;
+    }
+
+    include_spip('inc/filtres');
+
+    // Article Agora / Tribune libre
+    if (stripos($titre, 'Agora') !== false || stripos($titre, 'Tribune') !== false || stripos($titre, 'Débat') !== false) {
+        $src = find_in_path('agora-miniature.png') ?: 'squelettes/agora-miniature.png';
+        if ($id_article && !file_exists(_DIR_IMG . 'arton' . intval($id_article) . '.png') && file_exists($src)) {
+            @copy($src, _DIR_IMG . 'arton' . intval($id_article) . '.png');
+        }
+        return '<img src="' . $src . '" alt="' . attribut_html($titre) . '" width="640" height="360" loading="lazy" />';
+    }
+
+    // Article Bienvenue / Lancement
+    if (stripos($titre, 'Bienvenue') !== false) {
+        $src = find_in_path('bienvenue-miniature.png') ?: 'squelettes/bienvenue-miniature.png';
+        if ($id_article && !file_exists(_DIR_IMG . 'arton' . intval($id_article) . '.png') && file_exists($src)) {
+            @copy($src, _DIR_IMG . 'arton' . intval($id_article) . '.png');
+        }
+        return '<img src="' . $src . '" alt="' . attribut_html($titre) . '" width="640" height="360" loading="lazy" />';
+    }
+
+    return '<span class="card-symbol">✳</span>';
+}
+
+/**
+ * Filtre pour l'image d'en-tête de l'article complet (sans fallback d'astérisque)
+ */
+function filtre_jeunesse_hero_logo_dist($logo = '', $titre = '', $id_article = 0) {
+    if (!empty(trim($logo))) {
+        return '<div class="article-hero-image">' . $logo . '</div>';
+    }
+
+    include_spip('inc/filtres');
+
+    if (stripos($titre, 'Agora') !== false || stripos($titre, 'Tribune') !== false || stripos($titre, 'Débat') !== false) {
+        $src = find_in_path('agora-miniature.png') ?: 'squelettes/agora-miniature.png';
+        if ($id_article && !file_exists(_DIR_IMG . 'arton' . intval($id_article) . '.png') && file_exists($src)) {
+            @copy($src, _DIR_IMG . 'arton' . intval($id_article) . '.png');
+        }
+        return '<div class="article-hero-image"><img src="' . $src . '" alt="' . attribut_html($titre) . '" width="1000" loading="lazy" /></div>';
+    }
+
+    if (stripos($titre, 'Bienvenue') !== false) {
+        $src = find_in_path('bienvenue-miniature.png') ?: 'squelettes/bienvenue-miniature.png';
+        if ($id_article && !file_exists(_DIR_IMG . 'arton' . intval($id_article) . '.png') && file_exists($src)) {
+            @copy($src, _DIR_IMG . 'arton' . intval($id_article) . '.png');
+        }
+        return '<div class="article-hero-image"><img src="' . $src . '" alt="' . attribut_html($titre) . '" width="1000" loading="lazy" /></div>';
+    }
+
+    return '';
+}
+
+
