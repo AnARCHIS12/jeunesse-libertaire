@@ -2,7 +2,7 @@ services:
   web:
     build:
       context: .
-    image: jeunesse-libertaire/spip:4.4.25
+    image: jeunesse-libertaire/spip:4.4.28
     container_name: jeunesse-libertaire
     restart: unless-stopped
     depends_on:

@@ -1,4 +1,4 @@
-FROM ipeos/spip:4.4.25
+FROM ipeos/spip:4.4.28
 
 LABEL org.opencontainers.image.title="Jeunesse Libertaire" \
       org.opencontainers.image.description="Média participatif d'éducation populaire basé sur SPIP" \
