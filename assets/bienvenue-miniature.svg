@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <style>
+      .bg { fill: #181715; }
+      .red-panel { fill: #d32920; }
+      .paper-panel { fill: #f6f3ed; }
+      .title-white { font-family: 'Manrope', 'Helvetica Neue', Arial, sans-serif; font-size: 80px; font-weight: 800; fill: #ffffff; letter-spacing: -0.05em; }
+      .title-red { font-family: 'Manrope', 'Helvetica Neue', Arial, sans-serif; font-size: 80px; font-weight: 800; fill: #d32920; letter-spacing: -0.05em; }
+      .title-dark { font-family: 'Manrope', 'Helvetica Neue', Arial, sans-serif; font-size: 80px; font-weight: 800; fill: #181715; letter-spacing: -0.05em; }
+      .mono-tag { font-family: 'DM Mono', monospace, Courier; font-size: 20px; font-weight: 600; fill: #ffd8d2; letter-spacing: 0.16em; text-transform: uppercase; }
+      .mono-dark { font-family: 'DM Mono', monospace, Courier; font-size: 20px; font-weight: 600; fill: #181715; letter-spacing: 0.16em; text-transform: uppercase; }
+      .body-text { font-family: Georgia, serif; font-size: 28px; fill: #eae4d9; line-height: 1.5; }
+    </style>
+  </defs>
+
+  <!-- Fond général sombre -->
+  <rect width="1200" height="675" class="bg"/>
+
+  <!-- Trame de fond subtile -->
+  <circle cx="1000" cy="337" r="420" fill="none" stroke="#252422" stroke-width="2"/>
+  <circle cx="1000" cy="337" r="320" fill="none" stroke="#252422" stroke-width="2"/>
+  <circle cx="1000" cy="337" r="220" fill="none" stroke="#252422" stroke-width="2"/>
+  <circle cx="1000" cy="337" r="120" fill="none" stroke="#252422" stroke-width="2"/>
+
+  <!-- Bloc rouge dynamique gauche -->
+  <polygon points="0,0 520,0 440,675 0,675" class="red-panel" />
+
+  <!-- Logo A cerclé stylisé dans la zone rouge -->
+  <circle cx="230" cy="310" r="150" fill="none" stroke="#ffffff" stroke-width="18"/>
+  <polygon points="230,195 140,410 320,410" fill="none" stroke="#ffffff" stroke-width="20" stroke-linejoin="miter"/>
+  <line x1="110" y1="340" x2="350" y2="340" stroke="#ffffff" stroke-width="20" stroke-linecap="square"/>
+
+  <!-- Libellé dans la colonne rouge -->
+  <text x="70" y="550" class="mono-tag">ÉDUCATION POPULAIRE</text>
+  <text x="70" y="585" class="mono-tag">AUTOGESTION · LUTTES</text>
+
+  <!-- Cartouche papier haut droit -->
+  <rect x="520" y="70" width="360" height="44" class="paper-panel"/>
+  <text x="540" y="100" class="mono-dark">MANIFESTE DE BIENVENUE</text>
+
+  <!-- Titre principal -->
+  <text x="520" y="215" class="title-white">PRENDRE LA PAROLE,</text>
+  <text x="520" y="295" class="title-red">CONSTRUIRE L’AVENIR.</text>
+
+  <!-- Filet séparateur -->
+  <line x1="520" y1="345" x2="1120" y2="345" stroke="#403c37" stroke-width="2"/>
+
+  <!-- Description / Manifeste -->
+  <text x="520" y="405" class="body-text">Un média d'émancipation collective écrit par et pour les lycéen·nes,</text>
+  <text x="520" y="445" class="body-text">les étudiant·es et la jeunesse mobilisée.</text>
+  <text x="520" y="505" class="body-text">Refuser la résignation. Partager les savoirs d'action.</text>
+  <text x="520" y="545" class="body-text">Fédérer nos luttes sans tutelle ni frontières.</text>
+
+  <!-- Signature bas droite -->
+  <rect x="520" y="600" width="600" height="2" fill="#d32920"/>
+  <text x="1120" y="628" text-anchor="end" font-family="'DM Mono', monospace" font-size="16" fill="#888279" letter-spacing="0.1em">JEUNESSE LIBERTAIRE · COMMISSIONS D'ÉDITION</text>
+</svg>
