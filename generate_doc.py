@@ -116,7 +116,7 @@ add_body(
 )
 add_body(
     "1. Proposer un texte, une analyse ou un témoignage : rendez-vous sur le formulaire public du site. "
-    "Chaque proposition est relue et discutée collectivement par les camarades du collectif."
+    "Chaque proposition est relue et discutée collectivement par les compagnes et compagnons du collectif."
 )
 add_body(
     "2. Débattre et enrichir : réagissez sous les publications dans les espaces de discussion modérés."

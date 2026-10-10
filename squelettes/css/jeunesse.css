@@ -117,24 +117,41 @@
 .forum-compose-box {
   background: var(--white);
   border: 1px solid var(--line);
-  padding: 34px 38px;
+  padding: 30px 34px;
   margin: 35px 0 50px;
   box-shadow: 6px 6px 0 var(--ink);
 }
-.compose-header {
+.forum-compose-toggle {
+  width: 100%;
+}
+.forum-compose-toggle summary.compose-header {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+}
+.forum-compose-toggle summary::-webkit-details-marker,
+.forum-compose-toggle summary::marker {
+  display: none;
+}
+.compose-header-left {
   display: flex;
   align-items: center;
   gap: 18px;
-  margin-bottom: 22px;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 18px;
 }
 .compose-header .mark {
   font-size: 38px;
+  flex-shrink: 0;
 }
 .compose-header h2 {
-  font-size: 26px;
-  margin: 0 0 6px;
+  font-size: 24px;
+  margin: 0 0 4px;
   letter-spacing: -.04em;
 }
 .compose-header p {
@@ -142,7 +159,133 @@
   margin: 0;
   font-size: 14px;
 }
+.compose-action-btn {
+  flex-shrink: 0;
+  cursor: pointer;
+  font-weight: 700;
+}
+.forum-compose-toggle[open] .btn-text-closed {
+  display: none;
+}
+.forum-compose-toggle[open] .btn-text-open {
+  display: inline;
+}
+.forum-compose-toggle:not([open]) .btn-text-open {
+  display: none;
+}
+.forum-compose-toggle:not([open]) .btn-text-closed {
+  display: inline;
+}
+.forum-compose-toggle:not([open]) summary.compose-header {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
 .forum-msg-title {
   color: var(--red);
   font-weight: 700;
 }
+
+/* Styles formulaires SPIP pour le forum */
+.formulaire_forum fieldset {
+  border: 1px solid var(--line);
+  padding: 18px 20px;
+  margin: 0 0 20px;
+  background: var(--paper);
+}
+.formulaire_forum legend {
+  font: 12px 'DM Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 700;
+  color: var(--red);
+  padding: 0 6px;
+}
+.formulaire_forum .editer-groupe {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.formulaire_forum .editer {
+  margin: 0;
+}
+.formulaire_forum .editer label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+.formulaire_forum input[type="text"],
+.formulaire_forum input[type="email"],
+.formulaire_forum textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--white);
+  padding: 12px 14px;
+  font: 15px/1.5 Manrope, sans-serif;
+  color: var(--ink);
+  box-sizing: border-box;
+  border-radius: 0;
+}
+.formulaire_forum input:focus,
+.formulaire_forum textarea:focus {
+  outline: 2px solid var(--ink);
+  border-color: var(--ink);
+}
+.formulaire_forum .boutons {
+  margin-top: 18px;
+  text-align: right;
+}
+.formulaire_forum .boutons input.submit {
+  display: inline-block;
+  background: var(--red);
+  color: var(--white);
+  font: 13px 'DM Mono', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 12px 24px;
+  border: 1px solid var(--ink);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform .1s, box-shadow .1s;
+}
+.formulaire_forum .boutons input.submit:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.formulaire_forum fieldset.previsu {
+  background: #fffdf8;
+  border: 2px dashed var(--ink);
+  padding: 20px;
+  margin-top: 20px;
+}
+.formulaire_forum .comment-meta {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.formulaire_forum .comment-titre {
+  font-size: 16px;
+  color: var(--ink);
+  margin-right: 10px;
+}
+.formulaire_forum .comment-texte {
+  font: 15px/1.6 Georgia, serif;
+  color: var(--ink);
+}
+
+@media (max-width: 760px) {
+  .forum-compose-box {
+    padding: 22px 20px;
+  }
+  .forum-compose-toggle summary.compose-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .compose-action-btn {
+    text-align: center;
+  }
+}
+

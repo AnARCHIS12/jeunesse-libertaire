@@ -1,1 +1,5 @@
 .env
+__pycache__/
+*.pyc
+generate_doc_clean.py
+generate_miniature_v2.py

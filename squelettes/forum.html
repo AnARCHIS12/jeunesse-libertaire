@@ -1,6 +1,4 @@
-<BOUCLE_rubrique_debats(RUBRIQUES){titre=Débats}{0,1}>
-#SET{id_debats,#ID_RUBRIQUE}
-</BOUCLE_rubrique_debats>
+#SET{id_agora,#VAL|jeunesse_id_agora}
 <!doctype html>
 <html lang="fr">
 <head>
@@ -8,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Forum & Débats — Jeunesse Libertaire</title>
   <meta name="description" content="Espace d'échange direct, de débat et de discussion des luttes lycéennes et étudiantes.">
-  <link rel="stylesheet" href="[(#CHEMIN{css/jeunesse.css})]?v=6">
+  <link rel="stylesheet" href="[(#CHEMIN{css/jeunesse.css})]?v=8">
 </head>
 <body>
 <INCLURE{fond=inclure/top-bar} />
@@ -34,33 +32,44 @@
 
   <!-- SECTION 1 : LANCER UNE DISCUSSION LIBRE -->
   <section class="forum-compose-box">
-    <div class="compose-header">
-      <span class="mark">Ⓐ</span>
-      <div>
-        <h2>Lancer un nouveau débat ou message direct</h2>
-        <p>Pas besoin de compte. Indiquez simplement votre pseudo et votre sujet pour échanger avec les autres camarades.</p>
+    <details class="forum-compose-toggle" open>
+      <summary class="compose-header">
+        <div class="compose-header-left">
+          <span class="mark">Ⓐ</span>
+          <div>
+            <h2>Lancer un nouveau débat ou message direct</h2>
+            <p>Pas besoin de compte. Indiquez simplement votre pseudo et votre sujet pour échanger avec les compagnes et compagnons de lutte.</p>
+          </div>
+        </div>
+        <span class="button button-small compose-action-btn">
+          <span class="btn-text-open">Replier le formulaire ▴</span>
+          <span class="btn-text-closed">✎ Ouvrir le formulaire ▾</span>
+        </span>
+      </summary>
+
+      <div class="compose-form-wrapper">
+        <BOUCLE_agora_form(ARTICLES){id_article=#GET{id_agora}}>
+          #FORMULAIRE_FORUM{#SELF}
+        </BOUCLE_agora_form>
       </div>
-    </div>
-    [(#GET{id_debats}|oui)
-      #FORMULAIRE_FORUM{rubrique,#GET{id_debats}}
-    ]
+    </details>
   </section>
 
-  <!-- SECTION 2 : FILS DE DISCUSSIONS LIBRES DE LA RUBRIQUE DÉBATS -->
-  [(#GET{id_debats}|oui)
+  <!-- SECTION 2 : FILS DE DISCUSSIONS LIBRES DE L'AGORA -->
+  [(#GET{id_agora}|oui)
   <B_messages_libres>
   <section class="section-head" style="padding-left:0;padding-right:0;">
     <div>
       <p class="eyebrow">Discussions en cours</p>
-      <h2>Derniers messages du forum libre</h2>
+      <h2>Derniers messages de l’Agora</h2>
     </div>
   </section>
   <div class="forum-messages" style="margin-bottom: 60px;">
-    <BOUCLE_messages_libres(FORUMS){id_rubrique=#GET{id_debats}}{plat}{!par date}{0,30}>
+    <BOUCLE_messages_libres(FORUMS){id_article=#GET{id_agora}}{plat}{!par date}{0,30}>
     <article class="forum-item">
       <header class="forum-item-header">
         <strong>#NOM</strong> · <time>[(#DATE|affdate)]</time>
-        [<span class="forum-msg-title"> — #TITRE</span>]
+        [<span class="forum-msg-title"> — (#TITRE)</span>]
       </header>
       <div class="forum-item-body">
         #TEXTE
