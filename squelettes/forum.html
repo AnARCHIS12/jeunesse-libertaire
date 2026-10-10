@@ -92,6 +92,11 @@
   <section class="forum-grid">
     <BOUCLE_discussions(ARTICLES){!par date}{0,20}>
     <article class="forum-card">
+      [(#LOGO_ARTICLE|oui)
+      <div class="card-image" style="margin-bottom:14px;overflow:hidden;border:1px solid var(--line);">
+        [(#LOGO_ARTICLE|image_reduire{600,0}|inserer_attribut{alt,#TITRE})]
+      </div>
+      ]
       <div class="forum-card-header">
         <span class="eyebrow">[(#DATE|affdate)]</span>
         <h3><a href="#URL_ARTICLE#discussion">#TITRE</a></h3>

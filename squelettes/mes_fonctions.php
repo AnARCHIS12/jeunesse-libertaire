@@ -37,5 +37,15 @@ function filtre_jeunesse_id_agora_dist($dummy = '') {
         ]);
         sql_updateq('spip_rubriques', ['statut' => 'publie'], 'id_rubrique=' . intval($id_rubrique));
     }
+
+    // Déploiement automatique du logo arton{id}.png dans IMG/ si absent
+    $logo_cible = _DIR_IMG . 'arton' . intval($id) . '.png';
+    if (!file_exists($logo_cible)) {
+        $source = find_in_path('agora-miniature.png') ?: find_in_path('assets/agora-miniature.png');
+        if ($source && file_exists($source)) {
+            @copy($source, $logo_cible);
+        }
+    }
+
     return intval($id);
 }
