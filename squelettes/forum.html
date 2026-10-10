@@ -37,9 +37,14 @@
       </div>
       <p class="forum-card-intro">#INTRODUCTION</p>
       <div class="forum-card-footer">
+        <B_nb_comm>
+        <span class="comment-count">
         <BOUCLE_nb_comm(FORUMS){id_article}{plat}>
         </BOUCLE_nb_comm>
-        <span class="comment-count">[(#TOTAL_BOUCLE|singulier_pluriel{1 message,#TOTAL_BOUCLE messages,aucun message})]</span>
+        [(#TOTAL_BOUCLE|=={1}|?{1 message,#TOTAL_BOUCLE messages})]
+        </span>
+        </B_nb_comm>
+        <span class="comment-count">Ouvrir le débat</span>
         <//B_nb_comm>
         <a class="button button-small" href="#URL_ARTICLE#discussion">Participer au débat ↗</a>
       </div>
