@@ -53,8 +53,7 @@ function formulaires_proposer_article_traiter_dist() {
     ];
     $erreur = objet_modifier('article', $id_article, $champs);
     if ($erreur) return ['message_erreur' => $erreur];
-    include_spip('action/instituer_objet');
-    objet_instituer('article', $id_article, ['statut' => 'prop']);
+    sql_updateq('spip_articles', ['statut' => 'prop'], 'id_article=' . intval($id_article));
 
     include_spip('inc/flock');
     $fichier = sous_repertoire(_DIR_TMP, 'jeunesse_libertaire') . 'depot-' . hash('sha256', $GLOBALS['ip'] ?? 'inconnue') . '.txt';
