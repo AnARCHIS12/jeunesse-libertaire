@@ -13,3 +13,11 @@ function jeunesse_collaboratif_ajouter_menus($menus) {
     }
     return $menus;
 }
+
+function jeunesse_collaboratif_nospam_lister_formulaires($formulaires) {
+    if (!is_array($formulaires)) {
+        $formulaires = [];
+    }
+    $formulaires[] = 'proposer_article';
+    return $formulaires;
+}

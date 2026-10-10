@@ -26,6 +26,7 @@ services:
       - spip_data:/var/www/html
       - ./squelettes:/var/www/html/squelettes:ro
       - ./plugins/jeunesse_collaboratif:/var/www/html/plugins/auto/jeunesse_collaboratif:ro
+      - ./plugins/nospam:/var/www/html/plugins/auto/nospam:ro
       - ./config:/var/www/html/config/jeunesse-libertaire:ro
       - ./prive/login_prive.css:/var/www/html/prive/themes/spip/login_prive.css:ro
       - ./prive/login_prive.css:/var/www/html/prive/themes/spip/login_jeunesse.css:ro

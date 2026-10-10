@@ -1,13 +1,24 @@
-import urllib.request, urllib.parse, re, time
+import urllib.request, urllib.parse, re, time, http.cookiejar
 
 base_url = 'http://127.0.0.1:8088/spip.php?page=proposer'
-req = urllib.request.Request(base_url)
-with urllib.request.urlopen(req) as resp:
+headers = {
+    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
+}
+
+cj = http.cookiejar.CookieJar()
+opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+
+req = urllib.request.Request(base_url, headers=headers)
+with opener.open(req) as resp:
     html = resp.read().decode('utf-8')
 
 # Capture avec saut de ligne
 form_action_args = re.search(r"name=['\"]formulaire_action_args['\"][^>]*value=['\"]([^'\"]+)['\"]", html, re.DOTALL).group(1)
 debut_form = re.search(r"name=['\"]debut_formulaire['\"][^>]*value=['\"]([^'\"]+)['\"]", html, re.DOTALL).group(1)
+m_jeton = re.search(r"name=['\"]_jeton['\"][^>]*value=['\"]([^'\"]+)['\"]", html, re.DOTALL)
+jeton = m_jeton.group(1) if m_jeton else ''
 
 print("Valeurs extraites avec succès.")
 print("Attente de 5 secondes pour passer la barrière anti-bot...")
@@ -18,9 +29,10 @@ post_data = {
     'formulaire_action': 'proposer_article',
     'formulaire_action_args': form_action_args,
     'formulaire_action_sign': '',
+    '_jeton': jeton,
     'debut_formulaire': debut_form,
     'website': '', # honeypot anti-spam : vide
-    'pseudo': 'Camarade_Test_Lycéen',
+    'pseudo': 'Compagne_Test_Lycéenne',
     'email': 'compagne@riseup.net',
     'titre': 'Test de proposition en direct : grève générale dans les lycées',
     'type_contribution': 'actualite',
@@ -31,9 +43,11 @@ post_data = {
 }
 
 encoded_data = urllib.parse.urlencode(post_data).encode('utf-8')
-post_req = urllib.request.Request(base_url, data=encoded_data, headers={'Content-Type': 'application/x-www-form-urlencoded'})
+post_headers = dict(headers)
+post_headers['Content-Type'] = 'application/x-www-form-urlencoded'
+post_req = urllib.request.Request(base_url, data=encoded_data, headers=post_headers)
 
-with urllib.request.urlopen(post_req) as resp:
+with opener.open(post_req) as resp:
     res_html = resp.read().decode('utf-8')
 
 print("RESULTAT :")

@@ -13,4 +13,5 @@
     <pipeline nom="declarer_tables_objets_sql" inclure="base/jeunesse_collaboratif.php" />
     <pipeline nom="declarer_tables_auxiliaires" inclure="base/jeunesse_collaboratif.php" />
     <pipeline nom="ajouter_menus" inclure="jeunesse_collaboratif_pipelines.php" />
+    <pipeline nom="nospam_lister_formulaires" inclure="jeunesse_collaboratif_pipelines.php" />
 </paquet>
